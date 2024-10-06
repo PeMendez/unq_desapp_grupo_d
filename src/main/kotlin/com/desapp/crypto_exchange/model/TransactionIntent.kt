@@ -1,5 +1,6 @@
 package com.desapp.crypto_exchange.model
 
+import com.desapp.crypto_exchange.utils.PriceOutOfRangeException
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -36,6 +37,14 @@ class TransactionIntent() {
 
     fun calculateArsAmount() {
 
+    }
+
+    fun validatePrice(intentPrice: Float, currentPrice: Float) {
+        val lowerBound = currentPrice * 0.95f
+        val upperBound = currentPrice * 1.05f
+        if (intentPrice !in lowerBound..upperBound) {
+            throw PriceOutOfRangeException("El precio de la intención no está dentro del margen de +/- 5% del precio actual.")
+        }
     }
 
 }

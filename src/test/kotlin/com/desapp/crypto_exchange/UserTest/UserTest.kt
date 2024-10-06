@@ -1,5 +1,5 @@
 import com.desapp.crypto_exchange.model.User
-import com.desapp.crypto_exchange.Exceptions.UserException
+import com.desapp.crypto_exchange.Exceptions.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -28,7 +28,7 @@ class UserTest {
 
     @Test
     fun `should throw exception when first name is too short`() {
-        val exception = assertThrows<UserException.UserCannotBeRegisteredException> {
+        val exception = assertThrows<UserCannotBeRegisteredException> {
             User(
                 firstName = "Jo",
                 lastName = "Perez",
@@ -44,7 +44,7 @@ class UserTest {
 
     @Test
     fun `should throw exception when email is invalid`() {
-        val exception = assertThrows<UserException.UserCannotBeRegisteredException> {
+        val exception = assertThrows<UserCannotBeRegisteredException> {
             User(
                 firstName = "Juan",
                 lastName = "Perez",
@@ -60,7 +60,7 @@ class UserTest {
 
     @Test
     fun `should throw exception when password is too weak`() {
-        val exception = assertThrows<UserException.UserCannotBeRegisteredException> {
+        val exception = assertThrows<UserCannotBeRegisteredException> {
             User(
                 firstName = "Juan",
                 lastName = "Perez",
@@ -76,7 +76,7 @@ class UserTest {
 
     @Test
     fun `should throw exception when CVU is invalid`() {
-        val exception = assertThrows<UserException.UserCannotBeRegisteredException> {
+        val exception = assertThrows<UserCannotBeRegisteredException> {
             User(
                 firstName = "Juan",
                 lastName = "Perez",
@@ -92,7 +92,7 @@ class UserTest {
 
     @Test
     fun `should throw exception when crypto wallet address is invalid`() {
-        val exception = assertThrows<UserException.UserCannotBeRegisteredException> {
+        val exception = assertThrows<UserCannotBeRegisteredException> {
             User(
                 firstName = "Juan",
                 lastName = "Perez",
