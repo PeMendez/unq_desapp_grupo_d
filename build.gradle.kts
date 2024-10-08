@@ -19,6 +19,13 @@ repositories {
 	mavenCentral()
 }
 
+val mockitoVersion = "3.10.0"
+val springBootStarterVersion = "3.2.4"
+val springSecurityVersion = "6.2.3"
+val validationApiVersion = "2.0.1.Final"
+val openapiVersion = "2.3.0"
+
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -27,9 +34,20 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-security:${springBootStarterVersion}")
+	implementation("org.springframework.security:spring-security-core:${springSecurityVersion}")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+	testImplementation("org.mockito:mockito-core:${mockitoVersion}")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}")
+	implementation("javax.validation:validation-api:${validationApiVersion}")
+	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.tngtech.archunit:archunit:1.3.0")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+
 }
 
 kotlin {
