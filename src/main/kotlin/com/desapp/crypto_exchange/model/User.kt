@@ -3,7 +3,7 @@ package com.desapp.crypto_exchange.model
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "user")
+@Table(name =  "`user`")
 class User(){
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null

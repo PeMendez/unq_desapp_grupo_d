@@ -17,7 +17,14 @@ class UserServiceImpl : UserService {
 
 
     override fun registerUser(user: User): User {
-        return userDao.findByEmail(user.email!!)?: throw UsernameAlreadyTakenException("Email ${user.email} has already taken")
+        val existingUser = userDao.findByEmail(user.email!!)
+
+            if (existingUser != null) {
+                throw UsernameAlreadyTakenException("Email ${user.email} has already been taken")
+            }
+
+            return userDao.save(user)
+
     }
 }
 
