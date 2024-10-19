@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Table(name =  "`user`")
 class User(){
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    var id: Long? = null
 
     @Column(nullable = false, unique =true)
     var email: String? = null
