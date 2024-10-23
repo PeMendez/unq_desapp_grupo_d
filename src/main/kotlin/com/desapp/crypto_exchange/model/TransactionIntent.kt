@@ -39,7 +39,7 @@ class TransactionIntent() {
     }
 
     fun calculateArsAmount() {
-
+//        Esta funcion calculara el valor en pesos argentinos
     }
 
     fun validatePrice(intentPrice: Float, currentPrice: Float) {
