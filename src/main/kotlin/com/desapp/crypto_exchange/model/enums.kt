@@ -20,3 +20,7 @@ enum class CryptoActive {
     TRXUSDT,
     AUDIOUSDT,
 }
+
+enum class TransactionStatus {
+    OPEN, CLOSED
+}

@@ -16,27 +16,30 @@ class TransactionIntent() {
     @ManyToOne
     var price: Price? = null
 
-    var amount : Float? = null
+    var amount: Float? = null
     var operationType: OperationType? = null
     var active: Boolean? = null
     var createdDate: LocalDateTime? = LocalDateTime.now()
+    var status: TransactionStatus? = null
 
     constructor(
         owner : User?,
         price : Price?,
         amount : Float?,
         operationType: OperationType?,
-        active: Boolean? = true
+        active: Boolean? = true,
+        status: TransactionStatus = TransactionStatus.OPEN
     ): this() {
         this.owner = owner
         this.price = price
         this.amount = amount
         this.operationType = operationType
         this.active = active
+        this.status = status
     }
 
     fun calculateArsAmount() {
-
+        TODO("Implement this function in the future")
     }
 
     fun validatePrice(intentPrice: Float, currentPrice: Float) {
