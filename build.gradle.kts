@@ -4,7 +4,9 @@ plugins {
 	id("org.springframework.boot") version "3.3.3"
 	id("io.spring.dependency-management") version "1.1.6"
 	kotlin("plugin.jpa") version "1.9.25"
+	id("org.sonarqube") version "5.1.0.4882"
 }
+
 
 group = "com.desapp"
 version = "0.0.1-SNAPSHOT"
@@ -58,4 +60,11 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "unq_desapp_grupo_d")
+		property("sonar.projectName", "unq_desapp_grupo_d")
+	}
 }
