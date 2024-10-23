@@ -5,6 +5,7 @@ plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
 	kotlin("plugin.jpa") version "1.9.25"
+	id("jacoco")
 }
 
 group = "com.desapp"
@@ -72,4 +73,21 @@ sonar {
 		property("sonar.projectName", "unq_desapp_grupo_d")
 		property("sonar.token", "sqp_acb1ec07d7fc14467b173248451bb1be2ee640f0")
 	}
+}
+
+jacoco {
+	toolVersion = "0.8.10" // Asegúrate de usar la última versión
+}
+
+tasks.jacocoTestReport{
+	dependsOn(tasks.test)
+	reports {
+		xml.required=true
+		html.required=true
+		html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+	}
+}
+
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport) // Ejecuta JaCoCo después de las pruebas
 }
