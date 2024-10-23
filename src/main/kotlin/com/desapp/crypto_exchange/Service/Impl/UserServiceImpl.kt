@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Service
+package com.desapp.crypto_exchange.Service.Impl
 
 import com.desapp.crypto_exchange.Exceptions.UsernameAlreadyTakenException
 import com.desapp.crypto_exchange.model.User
