@@ -1,6 +1,6 @@
 package com.desapp.crypto_exchange.Service.Impl
 
-import com.desapp.crypto_exchange.Repository.TransactionIntentRepository
+import com.desapp.crypto_exchange.repository.TransactionIntentRepository
 import com.desapp.crypto_exchange.Service.TransactionIntentService
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired

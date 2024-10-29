@@ -5,7 +5,7 @@ plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
 	kotlin("plugin.jpa") version "1.9.25"
-	id("jacoco")
+	jacoco
 }
 
 group = "com.desapp"
@@ -24,8 +24,6 @@ repositories {
 
 
 val mockitoVersion = "3.10.0"
-val springBootStarterVersion = "3.2.4"
-val springSecurityVersion = "6.2.3"
 val validationApiVersion = "2.0.1.Final"
 val openapiVersion = "2.3.0"
 val archunitVersion = "1.3.0"
@@ -37,11 +35,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.springframework.boot:spring-boot-starter-security:${springBootStarterVersion}")
-	implementation("org.springframework.security:spring-security-core:${springSecurityVersion}")
+	implementation("org.springframework.security:spring-security-core")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${webmvcVersion}")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}")
 	implementation("javax.validation:validation-api:${validationApiVersion}")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -76,7 +75,8 @@ sonar {
 }
 
 jacoco {
-	toolVersion = "0.8.10" // Asegúrate de usar la última versión
+	toolVersion = "0.8.11"
+	reportsDirectory = layout.buildDirectory.dir("jacocoReportDir")
 }
 
 tasks.jacocoTestReport{
@@ -89,5 +89,5 @@ tasks.jacocoTestReport{
 }
 
 tasks.test {
-	finalizedBy(tasks.jacocoTestReport) // Ejecuta JaCoCo después de las pruebas
+	finalizedBy(tasks.jacocoTestReport)
 }

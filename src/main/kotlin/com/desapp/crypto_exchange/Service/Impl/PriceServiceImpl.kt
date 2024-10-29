@@ -1,6 +1,6 @@
 package com.desapp.crypto_exchange.Service.Impl
 
-import com.desapp.crypto_exchange.Repository.PriceRepository
+import com.desapp.crypto_exchange.repository.PriceRepository
 import com.desapp.crypto_exchange.Service.BinanceService
 import com.desapp.crypto_exchange.Service.PriceService
 import com.desapp.crypto_exchange.model.CryptoActive

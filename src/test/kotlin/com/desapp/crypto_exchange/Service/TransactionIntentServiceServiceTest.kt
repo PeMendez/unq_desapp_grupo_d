@@ -1,6 +1,6 @@
 package com.desapp.crypto_exchange.Service
 
-import com.desapp.crypto_exchange.Repository.TransactionIntentRepository
+import com.desapp.crypto_exchange.repository.TransactionIntentRepository
 import com.desapp.crypto_exchange.repository.UserRepository
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith

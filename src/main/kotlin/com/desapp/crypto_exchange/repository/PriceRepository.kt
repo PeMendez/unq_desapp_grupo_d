@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Repository
+package com.desapp.crypto_exchange.repository
 
 import com.desapp.crypto_exchange.model.CryptoActive
 import com.desapp.crypto_exchange.model.Price
