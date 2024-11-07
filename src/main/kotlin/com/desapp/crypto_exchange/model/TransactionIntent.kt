@@ -21,6 +21,7 @@ class TransactionIntent() {
     var active: Boolean? = null
     var createdDate: LocalDateTime? = LocalDateTime.now()
     var status: TransactionStatus? = null
+    var priceInArs : Float? = null
 
     constructor(
         owner : User?,

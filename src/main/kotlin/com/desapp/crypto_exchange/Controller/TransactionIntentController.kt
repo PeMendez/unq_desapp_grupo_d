@@ -2,9 +2,8 @@ package com.desapp.crypto_exchange.Controller
 
 import com.desapp.crypto_exchange.DTOs.ResponseTransactionIntentDTO
 import com.desapp.crypto_exchange.DTOs.TransactionIntentDTO
-import com.desapp.crypto_exchange.Service.DolarService
+import com.desapp.crypto_exchange.Mapper.TransactionIntentMapper
 import com.desapp.crypto_exchange.Service.TransactionIntentService
-import com.desapp.crypto_exchange.utils.Mapper
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -20,9 +19,6 @@ class PostController {
 
     @Autowired
     lateinit var transactionIntentService: TransactionIntentService
-
-    @Autowired
-    lateinit var dolarService: DolarService
     @Operation(
         summary = "Publish a transaction intent",
         description = "Creates a new transaction intent for a purchase/sale intent."
@@ -40,11 +36,8 @@ class PostController {
 
     @PostMapping("/create/{userId}")
     fun createTransaction(@PathVariable userId: String, @RequestBody transactionDTO: TransactionIntentDTO): ResponseTransactionIntentDTO {
-        val purchaseDolarPriceInArs = dolarService.getDolarCryptoPrice()!!.compra
-        val transactionIntent = Mapper.dtoToTransactionIntent(transactionDTO)
+        val transactionIntent = TransactionIntentMapper.toModel(transactionDTO)
         val transactionIntentCreated = transactionIntentService.createTransactionIntent(transactionIntent, userId.toLong())
-//        transactionIntentCreated.calculateArsAmount()
-        val response = Mapper.transactionIntentToResponseTransactionIntentDTO(transactionIntentCreated)
-        return response
+        return TransactionIntentMapper.toDTO(transactionIntentCreated)
     }
 }
