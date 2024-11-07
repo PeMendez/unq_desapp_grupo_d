@@ -39,8 +39,12 @@ class TransactionIntent() {
         this.status = status
     }
 
-    fun calculateArsAmount() {
-        TODO("Implement this function in the future")
+    fun calculateArsAmount(dolarPrice: Float) {
+        if (price?.price != null) {
+            priceInArs = price!!.price!! * dolarPrice
+        } else {
+            throw IllegalArgumentException("Price must be specified to calculate ARS amount.")
+        }
     }
 
     fun validatePrice(intentPrice: Float, currentPrice: Float) {

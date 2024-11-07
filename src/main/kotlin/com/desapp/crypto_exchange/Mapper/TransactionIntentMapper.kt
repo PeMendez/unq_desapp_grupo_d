@@ -9,12 +9,21 @@ class TransactionIntentMapper {
     companion object {
 
         fun toDTO(transactionIntent: TransactionIntent): ResponseTransactionIntentDTO {
-            val DTO = ResponseTransactionIntentDTO()
-            return DTO
+            return ResponseTransactionIntentDTO(
+                id = transactionIntent.id,
+                ownerId = transactionIntent.owner?.id,
+                priceInArs = transactionIntent.priceInArs,
+                amount = transactionIntent.amount,
+                operationType = transactionIntent.operationType,
+                status = transactionIntent.status,
+                createdDate = transactionIntent.createdDate
+            )
         }
 
         fun toModel(transactionIntentDTO: TransactionIntentDTO): TransactionIntent {
             val transactionIntent = TransactionIntent()
+            transactionIntent.amount = transactionIntentDTO.amount
+            transactionIntent.operationType = transactionIntentDTO.operationType
             return transactionIntent
         }
     }

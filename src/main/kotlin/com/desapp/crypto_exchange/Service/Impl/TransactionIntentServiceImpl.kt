@@ -28,18 +28,23 @@ class TransactionIntentServiceImpl : TransactionIntentService {
     lateinit var dolarService: DolarService
 
     override fun createTransactionIntent(transactionIntent: TransactionIntent, id: Long) : TransactionIntent {
+        val user = userRepository.findById(id).orElseThrow {
+            UsernameNotFoundException("User with id $id was not found")
+        }
+        val price = priceRepository.findFirstByCryptoActiveOrderByPriceDesc(transactionIntent.price!!.cryptoActive!!)
+            ?: throw IllegalArgumentException("No price found for crypto active")
 
-        val lastPrice = priceRepository.findFirstByCryptoActiveOrderByPriceDesc(transactionIntent.price!!.cryptoActive!!)
+        transactionIntent.owner = user
+        transactionIntent.price = price
+
         val purchaseDolarPriceInArs = dolarService.getDolarCryptoPrice()?.compra?.toFloat()
             ?: throw Exception("No se pudo obtener el precio del dólar")
 
-        val calculatedPriceInArs = transactionIntent.price!!.price!! * purchaseDolarPriceInArs
-        transactionIntent.priceInArs = calculatedPriceInArs
+        transactionIntent.priceInArs = transactionIntent.price!!.price!! * purchaseDolarPriceInArs
 
-        transactionIntent.validatePrice(transactionIntent.price!!.price!!, lastPrice!!.price!!)
+        transactionIntent.validatePrice(transactionIntent.price!!.price!!, price.price!!)
         transactionIntentRepository.save(transactionIntent)
 
-        val user = userRepository.findById(id).getOrElse { throw UsernameNotFoundException("User with id $id was not found") }
         user.addTransactionIntent(transactionIntent)
         userRepository.save(user)
 
