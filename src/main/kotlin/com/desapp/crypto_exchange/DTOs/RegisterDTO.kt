@@ -1,6 +1,6 @@
 package com.desapp.crypto_exchange.DTOs
 
-class UserDTO(
+class RegisterDTO(
     val firstName: String?,
     val lastName: String?,
     val email: String?,

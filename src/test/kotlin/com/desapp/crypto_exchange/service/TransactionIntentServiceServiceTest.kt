@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Service
+package com.desapp.crypto_exchange.service
 
 import com.desapp.crypto_exchange.repository.TransactionIntentRepository
 import com.desapp.crypto_exchange.repository.UserRepository

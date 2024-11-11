@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Service
+package com.desapp.crypto_exchange.service
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

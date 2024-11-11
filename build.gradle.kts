@@ -1,64 +1,74 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	id("org.springframework.boot") version "3.3.3"
-	id("io.spring.dependency-management") version "1.1.6"
-	id("org.sonarqube") version "5.1.0.4882"
-	kotlin("jvm") version "1.9.25"
-	kotlin("plugin.spring") version "1.9.25"
-	kotlin("plugin.jpa") version "1.9.25"
+	id("org.springframework.boot") version "3.2.3"
+	id("io.spring.dependency-management") version "1.1.4"
+	kotlin("jvm") version "1.9.22"
+	kotlin("plugin.spring") version "1.9.22"
+	kotlin("plugin.jpa") version "1.9.22"
 	jacoco
 }
 
-group = "com.desapp"
+group = "ar.unq.desapp.grupob"
 version = "0.0.1-SNAPSHOT"
 
-
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+	sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
 	mavenCentral()
 }
 
-
 val mockitoVersion = "3.10.0"
+val jsonWebTokenVersion = "0.12.5"
+val springBootStarterVersion = "3.2.4"
+val springSecurityVersion = "6.2.3"
+val mySqlVersion = "8.0.33"
 val validationApiVersion = "2.0.1.Final"
 val openapiVersion = "2.3.0"
-val archunitVersion = "1.3.0"
-val webmvcVersion = "2.3.0"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.springframework.security:spring-security-core")
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${webmvcVersion}")
+	implementation("mysql:mysql-connector-java:${mySqlVersion}")
+	implementation("org.springframework.boot:spring-boot-starter-security:${springBootStarterVersion}")
+	implementation("org.springframework.security:spring-security-core:${springSecurityVersion}")
+	implementation("io.jsonwebtoken:jjwt-api:${jsonWebTokenVersion}")
+	implementation("io.jsonwebtoken:jjwt-root:${jsonWebTokenVersion}")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}")
 	implementation("javax.validation:validation-api:${validationApiVersion}")
-	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("com.github.ben-manes.caffeine:caffeine")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("org.mockito:mockito-core:${mockitoVersion}")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("com.tngtech.archunit:archunit:${archunitVersion}")
-
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-	runtimeOnly("com.h2database:h2")
+	testImplementation("com.tngtech.archunit:archunit:1.3.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+	runtimeOnly("com.h2database:h2")
+	runtimeOnly("com.mysql:mysql-connector-j")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:${jsonWebTokenVersion}")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:${jsonWebTokenVersion}")
+
+
+}
+jacoco {
+	toolVersion = "0.8.11"
+	reportsDirectory = layout.buildDirectory.dir("jacocoReportDir")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs += "-Xjsr305=strict"
+		jvmTarget = "17"
 	}
 }
 
@@ -66,19 +76,9 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-sonar {
-	properties {
-		property("sonar.projectKey", "unq_desapp_grupo_d")
-		property("sonar.projectName", "unq_desapp_grupo_d")
-		property("sonar.token", "sqp_acb1ec07d7fc14467b173248451bb1be2ee640f0")
-	}
+tasks.test{
+	finalizedBy(tasks.jacocoTestReport)
 }
-
-jacoco {
-	toolVersion = "0.8.11"
-	reportsDirectory = layout.buildDirectory.dir("jacocoReportDir")
-}
-
 tasks.jacocoTestReport{
 	dependsOn(tasks.test)
 	reports {
@@ -86,8 +86,4 @@ tasks.jacocoTestReport{
 		html.required=true
 		html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
 	}
-}
-
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport)
 }

@@ -1,22 +1,26 @@
 package com.desapp.crypto_exchange.controller
 
-import com.desapp.crypto_exchange.DTOs.UserDTO
+import com.desapp.crypto_exchange.DTOs.RegisterDTO
 import com.desapp.crypto_exchange.Exceptions.UserCannotBeRegisteredException
 import com.desapp.crypto_exchange.Exceptions.UsernameAlreadyTakenException
 import com.desapp.crypto_exchange.model.User
-import com.desapp.crypto_exchange.service.UserService
+import com.desapp.crypto_exchange.service.AuthenticationService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/users")
-class UserController(private val userService: UserService) {
+class AuthController {
+
+    @Autowired
+    lateinit var authenticationService: AuthenticationService
 
     @PostMapping("/register")
-    fun registerUser(@RequestBody userDTO: UserDTO): User {
-        val newUser = User(userDTO.firstName, userDTO.lastName, userDTO.email, userDTO.password, userDTO.address, userDTO.cvu, userDTO.cryptoWalletAddress)
-        return userService.registerUser(newUser)
+    fun registerUser(@RequestBody registerDTO: RegisterDTO): ResponseEntity<String> {
+        val newUser = User(registerDTO.firstName, registerDTO.lastName, registerDTO.email, registerDTO.password, registerDTO.address, registerDTO.cvu, registerDTO.cryptoWalletAddress)
+        val response = authenticationService.registerUser(newUser)
+        return ResponseEntity.ok(response)
     }
 
     @ExceptionHandler(UsernameAlreadyTakenException::class)

@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Service
+package com.desapp.crypto_exchange.service
 
 import com.desapp.crypto_exchange.DTOs.DolarPriceDTO
 import org.springframework.beans.factory.annotation.Autowired

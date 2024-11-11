@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Service
+package com.desapp.crypto_exchange.service
 
 import com.desapp.crypto_exchange.DTOs.CryptoPriceDTO
 import com.desapp.crypto_exchange.Exceptions.ApiNotResponding

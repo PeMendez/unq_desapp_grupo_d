@@ -1,8 +1,8 @@
-package com.desapp.crypto_exchange.Service.Impl
+package com.desapp.crypto_exchange.service.Impl
 
-import com.desapp.crypto_exchange.Service.DolarService
+import com.desapp.crypto_exchange.service.DolarService
 import com.desapp.crypto_exchange.repository.TransactionIntentRepository
-import com.desapp.crypto_exchange.Service.TransactionIntentService
+import com.desapp.crypto_exchange.service.TransactionIntentService
 import com.desapp.crypto_exchange.model.TransactionIntent
 import com.desapp.crypto_exchange.repository.PriceRepository
 import com.desapp.crypto_exchange.repository.UserRepository
@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import kotlin.jvm.optionals.getOrElse
 
 @Service
 @Transactional

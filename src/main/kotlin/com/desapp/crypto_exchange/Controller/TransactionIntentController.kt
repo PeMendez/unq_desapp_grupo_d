@@ -3,7 +3,7 @@ package com.desapp.crypto_exchange.Controller
 import com.desapp.crypto_exchange.DTOs.ResponseTransactionIntentDTO
 import com.desapp.crypto_exchange.DTOs.TransactionIntentDTO
 import com.desapp.crypto_exchange.Mapper.TransactionIntentMapper
-import com.desapp.crypto_exchange.Service.TransactionIntentService
+import com.desapp.crypto_exchange.service.TransactionIntentService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.responses.ApiResponse
