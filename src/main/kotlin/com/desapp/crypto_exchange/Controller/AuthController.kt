@@ -1,7 +1,10 @@
 package com.desapp.crypto_exchange.controller
 
+import com.desapp.crypto_exchange.DTOs.LoginDTO
 import com.desapp.crypto_exchange.DTOs.RegisterDTO
+import com.desapp.crypto_exchange.Exceptions.InvalidLoginException
 import com.desapp.crypto_exchange.Exceptions.UserCannotBeRegisteredException
+import com.desapp.crypto_exchange.Exceptions.UserNotRegisteredException
 import com.desapp.crypto_exchange.Exceptions.UsernameAlreadyTakenException
 import com.desapp.crypto_exchange.model.User
 import com.desapp.crypto_exchange.service.AuthenticationService
@@ -31,6 +34,22 @@ class AuthController {
     @ExceptionHandler(UserCannotBeRegisteredException::class)
     fun handleUserException(e: UserCannotBeRegisteredException): ResponseEntity<String> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.message)
+    }
+
+    @PostMapping("/login")
+    fun login(@RequestBody loginDTO: LoginDTO): ResponseEntity<String> {
+        val result = authenticationService.loginUser(loginDTO)
+        return ResponseEntity.ok(result)
+    }
+
+    @ExceptionHandler(InvalidLoginException::class)
+    fun handleInvalidLoginException(e: InvalidLoginException): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.message)
+    }
+
+    @ExceptionHandler(UserNotRegisteredException::class)
+    fun handleInvalidLoginException(e: UserNotRegisteredException): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.message)
     }
 
 }
