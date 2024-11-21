@@ -24,29 +24,49 @@ class TransactionIntentServiceImpl : TransactionIntentService {
     lateinit var userRepository: UserRepository
 
     @Autowired
-    lateinit var dolarService: DolarService
+    lateinit var dollarService: DolarService
+    override fun createTransactionIntent(transactionIntent: TransactionIntent, id: Long): TransactionIntent {
 
-    override fun createTransactionIntent(transactionIntent: TransactionIntent, id: Long) : TransactionIntent {
+        if (transactionIntent.price == null) {
+            throw IllegalArgumentException("TransactionIntent price cannot be null. Please ensure it is set before calling this method.")
+        }
+        if (transactionIntent.cryptoActive == null) {
+            throw IllegalArgumentException("TransactionIntent cryptoActive cannot be null.")
+        }
+        println("TransactionIntent: $transactionIntent")
+
+
         val user = userRepository.findById(id).orElseThrow {
             UsernameNotFoundException("User with id $id was not found")
         }
-        val price = priceRepository.findFirstByCryptoActiveOrderByPriceDesc(transactionIntent.price!!.cryptoActive!!)
-            ?: throw IllegalArgumentException("No price found for crypto active")
+        println("User: $user")
+
+
+        val price = priceRepository.findByCryptoActive(transactionIntent.cryptoActive!!)
+            ?: throw IllegalArgumentException("No price found for crypto active: ${transactionIntent.cryptoActive}")
+        println("Price: $price")
+
+
+        val purchaseDollarPriceInArs = dollarService.getDolarCryptoPrice()?.compra?.toFloat()
+            ?: throw IllegalStateException("No se pudo obtener el precio del dólar")
+        println("Purchase Dollar Price in ARS: $purchaseDollarPriceInArs")
+
+
+        transactionIntent.calculateArsAmount(purchaseDollarPriceInArs)
+
+
+        transactionIntent.validatePrice(transactionIntent.price!!, price.price!!)
+
 
         transactionIntent.owner = user
-        transactionIntent.price = price
-
-        val purchaseDolarPriceInArs = dolarService.getDolarCryptoPrice()?.compra?.toFloat()
-            ?: throw Exception("No se pudo obtener el precio del dólar")
-
-        transactionIntent.priceInArs = transactionIntent.price!!.price!! * purchaseDolarPriceInArs
-
-        transactionIntent.validatePrice(transactionIntent.price!!.price!!, price.price!!)
         transactionIntentRepository.save(transactionIntent)
+
 
         user.addTransactionIntent(transactionIntent)
         userRepository.save(user)
 
         return transactionIntent
     }
+
+
 }

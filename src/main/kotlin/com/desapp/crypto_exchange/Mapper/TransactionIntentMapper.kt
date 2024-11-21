@@ -12,6 +12,7 @@ class TransactionIntentMapper {
             return ResponseTransactionIntentDTO(
                 id = transactionIntent.id,
                 ownerId = transactionIntent.owner?.id,
+                price = transactionIntent.price,
                 priceInArs = transactionIntent.priceInArs,
                 amount = transactionIntent.amount,
                 operationType = transactionIntent.operationType,
@@ -24,6 +25,8 @@ class TransactionIntentMapper {
             val transactionIntent = TransactionIntent()
             transactionIntent.amount = transactionIntentDTO.amount
             transactionIntent.operationType = transactionIntentDTO.operationType
+            transactionIntent.price = transactionIntentDTO.price
+            transactionIntent.cryptoActive = transactionIntentDTO.cryptoActive
             return transactionIntent
         }
     }

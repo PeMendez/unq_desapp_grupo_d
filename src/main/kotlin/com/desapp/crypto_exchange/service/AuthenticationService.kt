@@ -45,6 +45,7 @@ class AuthenticationService {
         userRepository.save(user)
 
         logger.info("User ${user.email} has been registered.")
+        logger.info("User id ${user.id}")
         return jwtService.createToken(user)
     }
 

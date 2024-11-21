@@ -11,25 +11,26 @@ class TransactionIntent() {
     var id: Long? = null
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     var owner: User? = null
 
-    @ManyToOne
-    var price: Price? = null
-
+    var price: Float? = null
     var amount: Float? = null
     var operationType: OperationType? = null
     var active: Boolean? = null
     var createdDate: LocalDateTime? = LocalDateTime.now()
     var status: TransactionStatus? = null
     var priceInArs : Float? = null
+    var cryptoActive : CryptoActive? = null
 
     constructor(
         owner : User?,
-        price : Price?,
+        price : Float?,
         amount : Float?,
         operationType: OperationType?,
         active: Boolean? = true,
-        status: TransactionStatus = TransactionStatus.OPEN
+        status: TransactionStatus = TransactionStatus.OPEN,
+        cryptoActive: CryptoActive
     ): this() {
         this.owner = owner
         this.price = price
@@ -37,11 +38,12 @@ class TransactionIntent() {
         this.operationType = operationType
         this.active = active
         this.status = status
+        this.cryptoActive = cryptoActive
     }
 
-    fun calculateArsAmount(dolarPrice: Float) {
-        if (price?.price != null) {
-            priceInArs = price!!.price!! * dolarPrice
+    fun calculateArsAmount(dollarPrice: Float) {
+        if (price != null) {
+            priceInArs = price!! * dollarPrice
         } else {
             throw IllegalArgumentException("Price must be specified to calculate ARS amount.")
         }
