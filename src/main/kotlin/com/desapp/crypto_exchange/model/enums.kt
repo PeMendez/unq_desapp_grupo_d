@@ -1,7 +1,8 @@
 package com.desapp.crypto_exchange.model
 
 enum class OperationType {
-    PURCHASE, SALE
+    PURCHASE,
+    SALE
 }
 
 enum class CryptoActive {
@@ -21,6 +22,8 @@ enum class CryptoActive {
     AUDIOUSDT,
 }
 
-enum class TransactionStatus {
-    OPEN, CLOSED
+enum class TradeStatus {
+    PENDING,
+    COMPLETED,
+    CANCELLED
 }

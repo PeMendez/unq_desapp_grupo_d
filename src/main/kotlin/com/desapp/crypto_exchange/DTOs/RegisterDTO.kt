@@ -1,11 +1,11 @@
 package com.desapp.crypto_exchange.DTOs
 
-data class UserDTO(
-    val id: Long,
+class RegisterDTO(
     val firstName: String?,
     val lastName: String?,
-    val email: String,
+    val email: String?,
     val address: String?,
+    val password: String?,
     val cvu: String?,
-    val cryptoWalletAddress: String?
-)
+    val cryptoWalletAddress: String?)  {
+}

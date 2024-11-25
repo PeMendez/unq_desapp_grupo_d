@@ -19,6 +19,9 @@ class User(){
     var address: String? = null
     var password: String? = null
 
+    @OneToMany(mappedBy = "owner", cascade = [CascadeType.MERGE], orphanRemoval = true)
+    val transactionIntents: MutableList<TransactionIntent> = mutableListOf()
+
     constructor(firstName: String?, lastName: String?, email: String?, password: String?, address: String?, cvu: String?,cryptoWalletAddress: String?): this() {
         val rangeErrorMsg: (property: String) -> String = { property -> "The $property is too short or too long" }
         val emailPattern = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
@@ -35,6 +38,11 @@ class User(){
         this.cvu = Check.validate(cvu, cvuPattern, "The cvu must have 22 digits")
         this.cryptoWalletAddress =
             Check.validate(cryptoWalletAddress, cryptoWalletAddressPattern, "The crypto wallet address must have 8 digits")
+    }
+
+    fun addTransactionIntent(transactionIntent: TransactionIntent) {
+        transactionIntents.add(transactionIntent)
+        transactionIntent.owner = this
     }
 
     }

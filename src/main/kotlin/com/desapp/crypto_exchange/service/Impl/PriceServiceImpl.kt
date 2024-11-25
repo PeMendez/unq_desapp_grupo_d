@@ -1,8 +1,8 @@
-package com.desapp.crypto_exchange.Service.Impl
+package com.desapp.crypto_exchange.service.Impl
 
-import com.desapp.crypto_exchange.Repository.PriceRepository
-import com.desapp.crypto_exchange.Service.BinanceService
-import com.desapp.crypto_exchange.Service.PriceService
+import com.desapp.crypto_exchange.repository.PriceRepository
+import com.desapp.crypto_exchange.service.BinanceService
+import com.desapp.crypto_exchange.service.PriceService
 import com.desapp.crypto_exchange.model.CryptoActive
 import com.desapp.crypto_exchange.model.Price
 import org.springframework.beans.factory.annotation.Autowired
