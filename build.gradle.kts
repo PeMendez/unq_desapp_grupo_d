@@ -42,6 +42,10 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${webmvcVersion}")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}")
 	implementation("javax.validation:validation-api:${validationApiVersion}")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("com.github.ben-manes.caffeine:caffeine")
+
+
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
