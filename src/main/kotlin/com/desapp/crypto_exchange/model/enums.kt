@@ -22,6 +22,8 @@ enum class CryptoActive {
     AUDIOUSDT,
 }
 
-enum class TransactionStatus {
-    OPEN, CLOSED
+enum class TradeStatus {
+    PENDING,
+    COMPLETED,
+    CANCELLED
 }

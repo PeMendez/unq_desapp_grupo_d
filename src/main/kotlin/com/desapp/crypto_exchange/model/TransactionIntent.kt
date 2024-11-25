@@ -19,7 +19,7 @@ class TransactionIntent() {
     var operationType: OperationType? = null
     var active: Boolean? = null
     var createdDate: LocalDateTime? = LocalDateTime.now()
-    var status: TransactionStatus? = null
+    var status: TradeStatus? = null
     var priceInArs : Float? = null
     var cryptoActive : CryptoActive? = null
 
@@ -29,7 +29,7 @@ class TransactionIntent() {
         amount : Float?,
         operationType: OperationType?,
         active: Boolean? = true,
-        status: TransactionStatus = TransactionStatus.OPEN,
+        status: TradeStatus = TradeStatus.PENDING,
         cryptoActive: CryptoActive
     ): this() {
         this.owner = owner

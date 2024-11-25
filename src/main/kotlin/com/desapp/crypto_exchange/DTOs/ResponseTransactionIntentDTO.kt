@@ -1,7 +1,7 @@
 package com.desapp.crypto_exchange.DTOs
 
 import com.desapp.crypto_exchange.model.OperationType
-import com.desapp.crypto_exchange.model.TransactionStatus
+import com.desapp.crypto_exchange.model.TradeStatus
 import java.time.LocalDateTime
 
 data class ResponseTransactionIntentDTO(
@@ -11,6 +11,6 @@ data class ResponseTransactionIntentDTO(
     val priceInArs: Float?,
     val amount: Float?,
     val operationType: OperationType?,
-    val status: TransactionStatus?,
+    val status: TradeStatus?,
     val createdDate: LocalDateTime?
 )
