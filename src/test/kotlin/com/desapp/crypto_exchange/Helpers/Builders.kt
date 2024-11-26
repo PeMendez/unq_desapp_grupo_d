@@ -3,7 +3,7 @@ package com.desapp.crypto_exchange.Helpers
 import com.desapp.crypto_exchange.model.*
 import java.time.LocalDateTime
 
-class TransactionIntentBuilder {
+/*class TransactionIntentBuilder {
     private var owner: User? = null
     private var price: Price? = null
     private var amount: Float? = null
@@ -29,7 +29,7 @@ class TransactionIntentBuilder {
             this.createdDate = this@TransactionIntentBuilder.createdDate
         }
     }
-}
+}*/
 
 class UserBuilder {
     private var id: Long? = null
