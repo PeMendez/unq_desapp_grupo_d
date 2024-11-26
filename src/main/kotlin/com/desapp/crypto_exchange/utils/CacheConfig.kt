@@ -20,7 +20,8 @@ class CacheConfig {
     @Bean
     fun caffeineCacheBuilder(): Caffeine<Any, Any> {
         return Caffeine.newBuilder()
+            .initialCapacity(100)
+            .maximumSize(500)
             .expireAfterWrite(10, TimeUnit.MINUTES)
-            .maximumSize(100)
     }
 }

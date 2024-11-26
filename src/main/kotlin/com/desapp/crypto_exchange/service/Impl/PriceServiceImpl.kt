@@ -25,8 +25,9 @@ class PriceServiceImpl : PriceService {
     @Autowired
     lateinit var binanceService: BinanceService
 
-    @Cacheable(cacheNames = ["prices"], key="'allPrices'")
+    @Cacheable(cacheNames = ["prices"])
     override fun getPrices(): List<Price> {
+        println("Fetching prices from repository...")
         return priceRepository.findAll()
     }
 
