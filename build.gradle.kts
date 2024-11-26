@@ -12,6 +12,7 @@ plugins {
 group = "ar.unq.desapp.grupob"
 version = "0.0.1-SNAPSHOT"
 
+
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -19,6 +20,7 @@ java {
 repositories {
 	mavenCentral()
 }
+
 
 val mockitoVersion = "3.10.0"
 val jsonWebTokenVersion = "0.12.5"
