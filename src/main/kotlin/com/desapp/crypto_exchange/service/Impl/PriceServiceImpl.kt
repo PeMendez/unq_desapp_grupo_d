@@ -49,5 +49,10 @@ class PriceServiceImpl : PriceService {
         priceRepository.saveAll(prices)
     }
 
+    @Cacheable(cacheNames = ["prices"], key="'prices_'+#cryptoActive")
+    override fun getPricesWithCryptoActive(cryptoActive: CryptoActive): List<Price> {
+        return priceRepository.findAllByCryptoActive(cryptoActive)
+    }
+
 
 }
