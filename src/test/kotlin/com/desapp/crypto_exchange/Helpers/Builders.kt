@@ -14,6 +14,13 @@ class TransactionIntentBuilder {
     private var active: Boolean = true
     private var createdDate: LocalDateTime? = LocalDateTime.now()
 
+    fun build(): TransactionIntent {
+        var transactionIntent = TransactionIntent(owner, price, amount, operationType, active, status, cryptoActive)
+        transactionIntent.createdDate = createdDate
+        transactionIntent.id = id
+        return transactionIntent
+    }
+
     fun withOwner(owner: User?) : TransactionIntentBuilder {
         this.owner = owner
         return this
@@ -58,11 +65,7 @@ class TransactionIntentBuilder {
         return this
     }
 
-    fun build(): TransactionIntent {
-        var transactionIntent = TransactionIntent(owner, price, amount, operationType, active, status, cryptoActive)
-        transactionIntent.createdDate = createdDate
-        return transactionIntent
-    }
+
 }
 
 class UserBuilder {

@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 @Transactional
@@ -53,19 +54,12 @@ class TradeServiceImpl: TradeService {
             throw IllegalStateException("Transaction cannot be processed as the current price violates the +/-5% rule.")
         }
 
-        val trade = Trade(
-            buyer = buyer,
-            seller = seller,
-            transactionIntent = transactionIntent,
-            cryptoActive = cryptoActive,
-            nominalAmount = transactionIntent.amount!!,
-            tradePrice = price.price!!,
-            tradeType = transactionIntent.operationType!!
-        )
+        val trade = Trade(buyer, seller,transactionIntent,cryptoActive,transactionIntent.amount!!, price.price!!, transactionIntent.operationType!!)
 
+        tradeRepository.save(trade)
         transactionIntent.active = false
         transactionIntentRepository.save(transactionIntent)
-        return tradeRepository.save(trade)
+        return trade
     }
 
     override fun completeTrade(tradeId: Long) {
@@ -86,5 +80,6 @@ class TradeServiceImpl: TradeService {
     override fun getAllTrades(): List<Trade> {
         return tradeRepository.findAll()
     }
+
 
 }
