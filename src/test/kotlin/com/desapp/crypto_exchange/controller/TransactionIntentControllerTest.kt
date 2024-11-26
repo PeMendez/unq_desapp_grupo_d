@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Controller
+package com.desapp.crypto_exchange.controller
 
 import com.desapp.crypto_exchange.DTOs.DolarPriceDTO
 import com.desapp.crypto_exchange.Helpers.MockitoHelper

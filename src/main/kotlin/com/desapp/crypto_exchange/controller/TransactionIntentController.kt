@@ -1,4 +1,4 @@
-package com.desapp.crypto_exchange.Controller
+package com.desapp.crypto_exchange.controller
 
 import com.desapp.crypto_exchange.DTOs.ResponseTransactionIntentDTO
 import com.desapp.crypto_exchange.DTOs.TransactionIntentDTO

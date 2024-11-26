@@ -1,15 +1,12 @@
-package com.desapp.crypto_exchange.Controller
+package com.desapp.crypto_exchange.controller
 
 import com.desapp.crypto_exchange.DTOs.LoginDTO
 import com.desapp.crypto_exchange.DTOs.RegisterDTO
-import com.desapp.crypto_exchange.Exceptions.InvalidLoginException
-import com.desapp.crypto_exchange.Exceptions.UsernameAlreadyTakenException
 import com.desapp.crypto_exchange.Helpers.MockitoHelper
 import com.desapp.crypto_exchange.model.User
 import com.desapp.crypto_exchange.service.AuthenticationService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.beans.factory.annotation.Autowired
