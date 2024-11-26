@@ -18,17 +18,4 @@ object Check {
         if(value == null) throw UserCannotBeRegisteredException(errorMsg)
     }
 
-    val checkForPattern: (pattern: Regex, errorMessage: String) -> (value: String, property: String) -> Unit =
-        { pattern, errorMessage ->
-            { value, property ->
-                if (!pattern.matches(value)) throw UserCannotBeRegisteredException("The $property $errorMessage")
-            }
-        }
-
-    val checkForRange: (min: Int, max: Int) -> (value: String, property: String) -> Unit =
-        { min, max ->
-            { value, property ->
-                if(value.length !in min..max) throw UserCannotBeRegisteredException("The $property is too short or too long")
-            }
-        }
 }
