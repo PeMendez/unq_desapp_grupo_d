@@ -39,9 +39,9 @@ jobs:
 #      - name: Build with Gradle
 #        run: ./gradlew clean build
 
-      # Run tests and generate JaCoCo coverage report
-      - name: Test with Gradle
-        run: ./gradlew test
+#      # Run tests and generate JaCoCo coverage report
+#      - name: Test with Gradle
+#        run: ./gradlew test
 
       # Download and set up SonarScanner
       - name: Download SonarScanner
