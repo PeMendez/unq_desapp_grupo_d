@@ -274,6 +274,7 @@ class TradeBuilder {
             nominalAmount = this.nominalAmount,
             tradePrice = this.tradePrice,
             tradeType = this.tradeType!!,
+            tradeStatus = this.tradeStatus
         )
 
         if (this.id != null) {

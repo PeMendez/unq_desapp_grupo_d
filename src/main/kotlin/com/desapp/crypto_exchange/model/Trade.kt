@@ -42,7 +42,8 @@ class Trade {
         cryptoActive: CryptoActive,
         nominalAmount: Float,
         tradePrice: Float,
-        tradeType: OperationType
+        tradeType: OperationType,
+        tradeStatus: TradeStatus
     ) {
         this.buyer = buyer
         this.seller = seller
@@ -52,5 +53,6 @@ class Trade {
         this.tradePrice = tradePrice
         this.tradeType = tradeType
         this.amountInArs = tradePrice * nominalAmount
+        this.tradeStatus = tradeStatus
     }
 }

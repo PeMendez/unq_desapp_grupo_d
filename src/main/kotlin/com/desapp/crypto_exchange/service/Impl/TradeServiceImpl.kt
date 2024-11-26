@@ -54,7 +54,7 @@ class TradeServiceImpl: TradeService {
             throw IllegalStateException("Transaction cannot be processed as the current price violates the +/-5% rule.")
         }
 
-        val trade = Trade(buyer, seller,transactionIntent,cryptoActive,transactionIntent.amount!!, price.price!!, transactionIntent.operationType!!)
+        val trade = Trade(buyer, seller,transactionIntent,cryptoActive,transactionIntent.amount!!, price.price!!, transactionIntent.operationType!!, tradeStatus = TradeStatus.PENDING)
 
         tradeRepository.save(trade)
         transactionIntent.active = false
