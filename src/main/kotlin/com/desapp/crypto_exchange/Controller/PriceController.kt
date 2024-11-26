@@ -4,6 +4,7 @@ import com.desapp.crypto_exchange.service.PriceService
 import com.desapp.crypto_exchange.model.Price
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import org.springframework.cache.annotation.Cacheable
 
 
 @RestController
