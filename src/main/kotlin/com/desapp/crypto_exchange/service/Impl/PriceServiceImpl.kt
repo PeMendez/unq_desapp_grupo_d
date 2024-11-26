@@ -7,12 +7,16 @@ import com.desapp.crypto_exchange.model.CryptoActive
 import com.desapp.crypto_exchange.model.Price
 import org.springframework.beans.factory.annotation.Autowired
 import jakarta.transaction.Transactional
+import org.springframework.cache.annotation.CacheConfig
+import org.springframework.cache.annotation.CachePut
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 
 @Transactional
 @Service
+@CacheConfig(cacheNames = ["prices"])
 class PriceServiceImpl : PriceService {
 
     @Autowired
@@ -21,11 +25,12 @@ class PriceServiceImpl : PriceService {
     @Autowired
     lateinit var binanceService: BinanceService
 
-
+    @Cacheable(cacheNames = ["prices"], key="'allPrices'")
     override fun getPrices(): List<Price> {
         return priceRepository.findAll()
     }
 
+    @CachePut(cacheNames = ["prices"], key = "'allPrices'", condition = "True")
     override fun updatePrice() {
         val binancePrices = binanceService.getAllPrices()
 
