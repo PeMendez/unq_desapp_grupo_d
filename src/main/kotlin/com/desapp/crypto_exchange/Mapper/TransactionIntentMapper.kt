@@ -17,7 +17,8 @@ class TransactionIntentMapper {
                 amount = transactionIntent.amount,
                 operationType = transactionIntent.operationType,
                 status = transactionIntent.status,
-                createdDate = transactionIntent.createdDate
+                createdDate = transactionIntent.createdDate,
+                cryptoActive = transactionIntent.cryptoActive!!
             )
         }
 

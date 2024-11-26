@@ -4,30 +4,64 @@ import com.desapp.crypto_exchange.model.*
 import java.time.LocalDateTime
 
 class TransactionIntentBuilder {
+    private var id: Long? = null
     private var owner: User? = null
-    private var price: Price? = null
-    private var amount: Float? = null
-    private var operationType: OperationType? = null
-    private var active: Boolean? = true
+    private var price: Float = 8F
+    private var cryptoActive: CryptoActive = CryptoActive.ADAUSDT
+    private var status : TradeStatus = TradeStatus.PENDING
+    private var amount: Float = 1F
+    private var operationType: OperationType? = OperationType.SALE
+    private var active: Boolean = true
     private var createdDate: LocalDateTime? = LocalDateTime.now()
 
-    fun withOwner(owner: User) = apply { this.owner = owner }
-    fun withPrice(price: Price) = apply { this.price = price }
-    fun withAmount(amount: Float) = apply { this.amount = amount }
-    fun withOperationType(operationType: OperationType) = apply { this.operationType = operationType }
-    fun withActive(active: Boolean) = apply { this.active = active }
-    fun withCreatedDate(createdDate: LocalDateTime) = apply { this.createdDate = createdDate }
+    fun withOwner(owner: User) : TransactionIntentBuilder {
+        this.owner = owner
+        return this
+    }
+    fun withId(id: Long?): TransactionIntentBuilder{
+        this.id = id
+        return this
+    }
+
+    fun withCryptoActive(cryptoActive: CryptoActive): TransactionIntentBuilder {
+        this.cryptoActive = cryptoActive
+        return this
+    }
+
+    fun withAmount(amount: Float): TransactionIntentBuilder {
+        this.amount = amount
+        return this
+    }
+
+    fun withPrice(price: Float): TransactionIntentBuilder {
+        this.price = price
+        return this
+    }
+
+    fun withOperationType(operationType: OperationType): TransactionIntentBuilder {
+        this.operationType = operationType
+        return this
+    }
+
+    fun withCreatedDate(createdDate: LocalDateTime): TransactionIntentBuilder {
+        this.createdDate = createdDate
+        return this
+    }
+
+    fun withStatus(status: TradeStatus): TransactionIntentBuilder {
+        this.status = status
+        return this
+    }
+
+    fun withActive(active: Boolean): TransactionIntentBuilder{
+        this.active = active
+        return this
+    }
 
     fun build(): TransactionIntent {
-        return TransactionIntent(
-            owner = owner,
-            price = price,
-            amount = amount,
-            operationType = operationType,
-            active = active
-        ).apply {
-            this.createdDate = this@TransactionIntentBuilder.createdDate
-        }
+        var transactionIntent = TransactionIntent(owner, price, amount, operationType, active, status, cryptoActive)
+        transactionIntent.createdDate = createdDate
+        return transactionIntent
     }
 }
 

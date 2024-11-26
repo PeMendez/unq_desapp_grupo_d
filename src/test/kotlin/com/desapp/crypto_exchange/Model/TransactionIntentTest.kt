@@ -17,7 +17,7 @@ class TransactionIntentTest {
     @Test
     fun `shouldAllowTransactionIntentWithinFivePercentPriceMargin`(){
         val user : User = UserBuilder().build()
-        val price: Price = PriceBuilder().withPrice(1000f).build()
+        val price = 1000f
         val transactionIntent = TransactionIntentBuilder()
             .withOwner(user)
             .withPrice(price)
@@ -26,11 +26,11 @@ class TransactionIntentTest {
             .withActive(true)
             .build()
 
-        val lastPrice = price.price!!
+        val lastPrice = price
         val lowerBound = lastPrice * 0.95f  // Límite inferior (95% del precio actual)
         val upperBound = lastPrice * 1.05f  // Límite superior (105% del precio actual)
 
-        val intentPrice = transactionIntent.price?.price!!
+        val intentPrice = transactionIntent.price!!
         assertTrue(intentPrice in lowerBound..upperBound)
         assertTrue(transactionIntent.active == true)
     }
@@ -38,7 +38,7 @@ class TransactionIntentTest {
     @Test
     fun `shouldBanTansactionIntenOutsideFivePercentPriceMargin`(){
         val user : User = UserBuilder().build()
-        val price: Price = PriceBuilder().withPrice(1000f).build()
+        val price = 1000f
         val transactionIntent = TransactionIntentBuilder()
             .withOwner(user)
             .withPrice(price)
@@ -50,7 +50,7 @@ class TransactionIntentTest {
         val intentPrice = 110f
 
         val exception = assertThrows<PriceOutOfRangeException> {
-            transactionIntent.validatePrice(intentPrice, price.price!!)
+            transactionIntent.validatePrice(intentPrice, price)
         }
 
         assertEquals("El precio de la intención no está dentro del margen de +/- 5% del precio actual.", exception.message)
