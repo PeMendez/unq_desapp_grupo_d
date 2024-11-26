@@ -30,10 +30,10 @@ class Trade {
     var tradeStatus: TradeStatus = TradeStatus.PENDING
 
     @Enumerated(EnumType.STRING)
-    var tradeType: OperationType? = null // COMPRA or VENTA
+    var tradeType: OperationType? = null
 
     @Column(nullable = true)
-    var reputationPoints: Int? = null // Points awarded for the user’s reputation
+    var reputationPoints: Int? = null
 
     constructor(
         buyer: User,

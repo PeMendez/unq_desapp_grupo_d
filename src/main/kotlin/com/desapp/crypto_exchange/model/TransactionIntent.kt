@@ -30,7 +30,7 @@ class TransactionIntent() {
         operationType: OperationType?,
         active: Boolean? = true,
         status: TradeStatus = TradeStatus.PENDING,
-        cryptoActive: CryptoActive
+        cryptoActive: CryptoActive?
     ): this() {
         this.owner = owner
         this.price = price
