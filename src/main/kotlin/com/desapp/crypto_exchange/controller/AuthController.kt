@@ -8,6 +8,7 @@ import com.desapp.crypto_exchange.Exceptions.UserNotRegisteredException
 import com.desapp.crypto_exchange.Exceptions.UsernameAlreadyTakenException
 import com.desapp.crypto_exchange.model.User
 import com.desapp.crypto_exchange.service.AuthenticationService
+import com.desapp.crypto_exchange.utils.MetricsRegistry
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,6 +19,9 @@ class AuthController {
 
     @Autowired
     lateinit var authenticationService: AuthenticationService
+
+    @Autowired
+    private lateinit var metricsRegistry: MetricsRegistry
 
     @PostMapping("/register")
     fun registerUser(@RequestBody registerDTO: RegisterDTO): ResponseEntity<String> {
@@ -38,6 +42,7 @@ class AuthController {
 
     @PostMapping("/login")
     fun login(@RequestBody loginDTO: LoginDTO): ResponseEntity<String> {
+        metricsRegistry.loginAttemptsCounter.increment() //Counts login attempts.
         val result = authenticationService.loginUser(loginDTO)
         return ResponseEntity.ok(result)
     }
