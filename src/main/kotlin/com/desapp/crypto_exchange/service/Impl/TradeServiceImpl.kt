@@ -66,6 +66,11 @@ class TradeServiceImpl: TradeService {
         val trade = tradeRepository.findById(tradeId).orElseThrow {
             IllegalArgumentException("Trade with id $tradeId does not exist.")
         }
+
+        if (trade.tradeStatus == TradeStatus.COMPLETED || trade.tradeStatus == TradeStatus.CANCELLED) {
+            throw IllegalStateException("Trade with id $tradeId is already completed or cancelled and cannot be modified.")
+        }
+
         trade.tradeStatus = TradeStatus.COMPLETED
         tradeRepository.save(trade)
     }
@@ -74,6 +79,11 @@ class TradeServiceImpl: TradeService {
         val trade = tradeRepository.findById(tradeId).orElseThrow {
             IllegalArgumentException("Trade with id $tradeId does not exist.")
         }
+
+        if (trade.tradeStatus == TradeStatus.COMPLETED || trade.tradeStatus == TradeStatus.CANCELLED) {
+            throw IllegalStateException("Trade with id $tradeId is already completed or cancelled and cannot be modified.")
+        }
+
         trade.tradeStatus = TradeStatus.CANCELLED
         tradeRepository.save(trade)
     }

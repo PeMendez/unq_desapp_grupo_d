@@ -29,9 +29,6 @@ class AuthenticationService {
     @Autowired
     lateinit var jwtService: JwtService
 
-    @Autowired
-    lateinit var authenticationManager: AuthenticationManager
-
     fun registerUser(user: User): String {
         if (isUsernameTaken(user.email!!)) {
             throw UsernameAlreadyTakenException("The email ${user.email} is already in use.")
