@@ -8,4 +8,6 @@ import org.springframework.stereotype.Component
 class MetricsRegistry(meterRegistry: MeterRegistry) {
 
     val loginAttemptsCounter: Counter = meterRegistry.counter("login_attempts_total")
+    val transactionCompletedCounter: Counter = meterRegistry.counter("transactions_completed_total")
+
 }
